@@ -19,6 +19,7 @@ import {
 	sortUsersInDesc,
 } from "../redux/features/userSlice";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const columns = [
 	{ id: "image", label: "Image", minWidth: 70 },
@@ -145,7 +146,11 @@ export default function UserTable({ users }) {
 												color="secondary"
 												aria-label="delete"
 												size="small"
-												onClick={() => dispatch(deleteUser(row.id))}
+												onClick={() => {
+													dispatch(deleteUser(row.id)).then(() => {
+														toast.success("User deleted successfully");
+													});
+												}}
 											>
 												Delete
 											</Button>
